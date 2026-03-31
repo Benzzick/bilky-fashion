@@ -36,8 +36,3 @@ Simply open `index.html` in any modern web browser — no installation or build 
 ```bash
 open index.html
 ```
-
-## Credits
-
-- Fonts from Google
-- Images from Unsplash
