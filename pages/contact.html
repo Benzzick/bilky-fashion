@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connect with BILKY - Schedule a consultation or share your feedback">
+    <title>Contact Us - BILKY</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        .contact-hero {
+            padding: var(--space-3xl) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg));
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-3xl) var(--space-lg);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+        }
+
+        .contact-info h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .contact-info p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        .info-card {
+            background: var(--color-surface);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+        }
+
+        .info-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .info-card-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text);
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        .info-card a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .info-card a:hover {
+            color: var(--color-accent);
+        }
+
+        .contact-form-section {
+            background: var(--color-surface);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .booking-tabs {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+            background: var(--color-bg);
+            padding: var(--space-xs);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: var(--space-md);
+            border: none;
+            background: transparent;
+            color: var(--color-text-light);
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-form-section h2 {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text);
+        }
+
+        .form-group .required {
+            color: var(--color-accent);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: var(--space-md);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            background: var(--color-bg);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: var(--color-surface);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input.error,
+        .form-group textarea.error,
+        .form-group select.error {
+            border-color: var(--color-accent);
+        }
+
+        .error-message {
+            color: var(--color-accent);
+            font-size: 0.875rem;
+            margin-top: var(--space-xs);
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: var(--space-md);
+        }
+
+        .business-hours {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: white;
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+        }
+
+        .business-hours h3 {
+            color: white;
+            margin-bottom: var(--space-md);
+        }
+
+        .hours-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .social-connect {
+            margin-top: var(--space-xl);
+        }
+
+        .social-connect h3 {
+            margin-bottom: var(--space-md);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--color-primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all var(--transition-base);
+        }
+
+        .social-icon:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            display: none;
+            animation: slideInDown 0.4s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h3 {
+            color: white;
+            margin-bottom: var(--space-xs);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-section {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Promo Badge -->
+    <div class="promo-marquee-bar">
+        <div class="marquee-track">
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="logo">BILKY</a>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Product Showcase</a></li>
+                <li><a href="trustees.html">Board of Trustees</a></li>
+                <li><a href="contact.html">Inquiries & Appointments</a></li>
+                <li><a href="events.html">Upcoming Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <span class="hero-badge">Connect With Us</span>
+            <h1>Let's Connect</h1>
+            <p style="max-width: 600px; margin: var(--space-md) auto 0;">Questions about our curated collections? Our style experts are ready to assist you in discovering pieces that perfectly complement your aesthetic.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="contact-container">
+        <div class="contact-form-section">
+            <div class="booking-tabs">
+                <button class="tab-btn active" data-tab="inquiry">Inquiries</button>
+                <button class="tab-btn" data-tab="appointment">Appointments</button>
+            </div>
+
+            <!-- Inquiry Form -->
+            <form id="contactForm" class="tab-content active" novalidate>
+                <h2>Send us a Message</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="Adam">
+                        <span class="error-message" id="firstNameError">Please enter your first name</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+                        <span class="error-message" id="lastNameError">Please enter your last name</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="adamsmith@example.com">
+                        <span class="error-message" id="emailError">Please enter a valid email address</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject <span class="required">*</span></label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="product">Product Question</option>
+                        <option value="order">Order Status</option>
+                        <option value="returns">Returns & Exchanges</option>
+                        <option value="wholesale">Wholesale Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span class="error-message" id="subjectError">Please select a subject</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message <span class="required">*</span></label>
+                    <textarea id="message" name="message" required
+                        placeholder="Tell us how we can help you..."></textarea>
+                    <span class="error-message" id="messageError">Please enter your message</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+            </form>
+
+            <!-- Appointment Form -->
+            <form id="appointmentForm" class="tab-content" novalidate>
+                <h2>Book a Professional Consultation</h2>
+                <p class="mb-lg">Select a date and time for a 1-on-1 session with our stylists.</p>
+
+                <div class="form-group">
+                    <label for="aptName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="aptName" name="aptName" placeholder="Full Name" required>
+                    <span class="error-message" id="aptNameError">Please enter your name</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="aptEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="aptEmail" name="aptEmail" placeholder="Email" required>
+                        <span class="error-message" id="aptEmailError">Please enter a valid email</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="aptPhone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="aptPhone" name="aptPhone" placeholder="Phone" required>
+                        <span class="error-message" id="aptPhoneError">Please enter your phone</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="aptDate">Preferred Date <span class="required">*</span></label>
+                    <input type="date" id="aptDate" name="aptDate" required>
+                    <span class="error-message" id="aptDateError">Please select a date</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Available Time Slots <span class="required">*</span></label>
+                    <div class="time-slots" id="timeSlots">
+                        <!-- Time buttons -->
+                        <button type="button" class="time-btn" data-time="09:00 AM">09:00 AM</button>
+                        <button type="button" class="time-btn" data-time="10:00 AM">10:00 AM</button>
+                        <button type="button" class="time-btn" data-time="11:00 AM">11:00 AM</button>
+                        <button type="button" class="time-btn" data-time="01:00 PM">01:00 PM</button>
+                        <button type="button" class="time-btn" data-time="02:00 PM">02:00 PM</button>
+                        <button type="button" class="time-btn" data-time="03:00 PM">03:00 PM</button>
+                        <button type="button" class="time-btn" data-time="04:00 PM">04:00 PM</button>
+                    </div>
+                    <input type="hidden" id="selectedTime" name="selectedTime" required>
+                    <span class="error-message" id="timeError">Please select a time slot</span>
+                </div>
+
+                <div id="bookingSummary" class="booking-confirm-card" style="display: none;">
+                    <strong>Selection Summary:</strong>
+                    <p id="summaryText">Please select a date and time.</p>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn">Confirm Appointment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">BILKY</div>
+                <p class="footer-description">Where elegance meets artistry. Curated pieces of exceptional quality that embody timeless style and sophistication.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="products.html">Product Showcase</a></li>
+                    <li><a href="trustees.html">Board of Trustees</a></li>
+                    <li><a href="contact.html">Inquiries & Appointments</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BILKY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/contact.js"></script>
+</body>
+
+</html>

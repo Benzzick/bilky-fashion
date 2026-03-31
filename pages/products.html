@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore BILKY's refined selection of luxury fashion and accessories">
+    <title>Shop - BILKY</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        .filters-section {
+            background: var(--color-surface);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .filters-container {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            font-size: 0.875rem;
+            color: var(--color-text);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: var(--space-sm);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: border-color var(--transition-fast);
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .products-count {
+            color: var(--color-text-light);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Promo Badge -->
+    <div class="promo-marquee-bar">
+        <div class="marquee-track">
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="logo">BILKY</a>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Product Showcase</a></li>
+                <li><a href="trustees.html">Board of Trustees</a></li>
+                <li><a href="contact.html">Inquiries & Appointments</a></li>
+                <li><a href="events.html">Upcoming Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="hero" style="min-height: 40vh;">
+        <div class="hero-container" style="grid-template-columns: 1fr;">
+            <div class="hero-content" style="text-align: center;">
+                <span class="hero-badge">Complete Catalog</span>
+                <h1>Curated Excellence</h1>
+                <p style="max-width: 600px; margin: 0 auto;">Discover our refined selection of sophisticated fashion and accessories</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category</label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="womens">Women's</option>
+                            <option value="mens">Men's</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="shoes">Footwear</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sortFilter">Sort By</label>
+                        <select id="sortFilter">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="searchInput">Search</label>
+                        <input type="text" id="searchInput" placeholder="Search products...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Header -->
+            <div class="products-header">
+                <h3 id="productsCount" class="products-count">Showing all products</h3>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="product-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">BILKY</div>
+                <p class="footer-description">Where elegance meets artistry. Curated pieces of exceptional quality that embody timeless style and sophistication.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="products.html">Product Showcase</a></li>
+                    <li><a href="trustees.html">Board of Trustees</a></li>
+                    <li><a href="contact.html">Inquiries & Appointments</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BILKY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/products.js"></script>
+</body>
+
+</html>

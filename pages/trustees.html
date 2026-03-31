@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the innovators and leaders of BILKY Fashion House">
+    <title>Board of Trustees - BILKY</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        .trustees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .trustee-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .trustee-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .trustee-image {
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        .trustee-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trustee-info {
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .trustee-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--color-text);
+        }
+
+        .trustee-role {
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .trustee-bio {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Promo Badge -->
+    <div class="promo-marquee-bar">
+        <div class="marquee-track">
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="logo">BILKY</a>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Product Showcase</a></li>
+                <li><a href="trustees.html">Board of Trustees</a></li>
+                <li><a href="contact.html">Inquiries & Appointments</a></li>
+                <li><a href="events.html">Upcoming Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-container" style="grid-template-columns: 1fr;">
+            <div class="hero-content" style="text-align: center;">
+                <span class="hero-badge">Our Visionaries</span>
+                <h1>Meet Our Leadership</h1>
+                <p style="max-width: 700px; margin: 0 auto;">Discover the passionate innovators and industry experts who guide BILKY's creative vision and commitment to exceptional luxury fashion.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trustees Section -->
+    <section class="section">
+        <div class="container">
+            <div class="trustees-grid" id="trusteesGrid">
+                <!-- Trustees are dynamicly populated from scripts/trustees.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">BILKY</div>
+                <p class="footer-description">Where elegance meets artistry. Curated pieces of exceptional quality that embody timeless style and sophistication.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="products.html">Product Showcase</a></li>
+                    <li><a href="trustees.html">Board of Trustees</a></li>
+                    <li><a href="contact.html">Inquiries & Appointments</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BILKY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/trustees.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover exclusive BILKY events and intimate experiences">
+    <title>Upcoming Events - BILKY</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        /* === FEATURED EVENT === */
+        .featured-event {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            background: var(--color-surface);
+            padding: var(--space-2xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-3xl);
+            overflow: hidden;
+        }
+
+        .featured-event-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .featured-event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-status-badge {
+            position: absolute;
+            bottom: var(--space-lg);
+            right: var(--space-lg);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 1.1rem;
+        }
+
+        .status-icon {
+            font-size: 1.5rem;
+        }
+
+        .featured-event-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .featured-category {
+            color: var(--color-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .featured-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .featured-description {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+
+        .featured-details {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: rgba(82, 117, 71, 0.08);
+            border-radius: var(--radius-md);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .detail-icon {
+            font-size: 1.5rem;
+            margin-top: 2px;
+        }
+
+        .detail-label {
+            display: block;
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .detail-value {
+            display: block;
+            color: var(--color-text);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        /* === TIMELINE LAYOUT === */
+        .events-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3xl);
+            position: relative;
+            padding: var(--space-xl) 0;
+        }
+
+        .events-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--color-primary), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-event {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 6px var(--color-surface), 0 0 0 8px var(--color-primary);
+        }
+
+        .timeline-item {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+            padding: var(--space-lg);
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+        }
+
+        .timeline-event:nth-child(even) .timeline-item {
+            grid-template-columns: 1fr 1fr;
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(82, 117, 71, 0.15);
+            border-color: var(--color-primary-light);
+        }
+
+        .timeline-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .timeline-item:hover .timeline-image img {
+            transform: scale(1.05);
+        }
+
+        .timeline-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .timeline-date {
+            color: var(--color-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin: 0;
+        }
+
+        .timeline-description {
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .timeline-meta {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .featured-event {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-event-image {
+                aspect-ratio: 16/9;
+                min-height: auto;
+            }
+
+            .featured-title {
+                font-size: 1.75rem;
+            }
+
+            .events-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr !important;
+                flex-direction: column !important;
+                padding: var(--space-lg);
+            }
+
+            .timeline-image {
+                width: 100%;
+                order: -1;
+            }
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .event-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .event-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: var(--color-bg);
+            position: relative;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-date-badge {
+            position: absolute;
+            top: var(--space-md);
+            left: var(--space-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .event-date-badge .day {
+            font-size: 1.5rem;
+            display: block;
+            line-height: 1;
+        }
+
+        .event-date-badge .month {
+            font-size: 0.75rem;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .event-info {
+            padding: var(--space-lg);
+        }
+
+        .event-category {
+            color: var(--color-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text);
+        }
+
+        .event-description {
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+        }
+
+        .event-meta-item span:first-child {
+            font-size: 1rem;
+        }
+
+        .event-actions {
+            margin-top: var(--space-md);
+        }
+
+        .countdown {
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg));
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .countdown h3 {
+            margin-bottom: var(--space-md);
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: var(--color-surface);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            min-width: 80px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            display: block;
+            margin-top: var(--space-xs);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Promo Badge -->
+    <div class="promo-marquee-bar">
+        <div class="marquee-track">
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💫</span> New: BILKY Spring 2026 Collection</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>📦</span> Complimentary Shipping on Orders Over $500</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>💳</span> Flexible Payment with Klarna & Afterpay</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>✨</span> Book Your Personal Styling Session</span>
+            <span class="marquee-sep"></span>
+            <span class="marquee-item"><span>🎁</span> Complimentary Gift Wrapping on All Orders</span>
+            <span class="marquee-sep"></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="logo">BILKY</a>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Product Showcase</a></li>
+                <li><a href="trustees.html">Board of Trustees</a></li>
+                <li><a href="contact.html">Inquiries & Appointments</a></li>
+                <li><a href="events.html">Upcoming Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-container" style="grid-template-columns: 1fr;">
+            <div class="hero-content" style="text-align: center;">
+                <span class="hero-badge">Stay Connected</span>
+                <h1>Upcoming Experiences</h1>
+                <p style="max-width: 700px; margin: 0 auto;">Immerse yourself in exclusive presentations, intimate gatherings, and curated experiences celebrating luxury and artistry.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Featured Next Event -->
+            <div class="featured-event">
+                <div class="featured-event-image">
+                    <img src="https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbiUyMHNob3d8ZW58MHx8MHx8fDA%3D"
+                        alt="Spring Fashion Show">
+                    <div class="event-status-badge">
+                        <span class="status-icon">⏰</span>
+                        <span class="status-text">Coming in 15 days</span>
+                    </div>
+                </div>
+                <div class="featured-event-content">
+                    <span class="featured-category">Fashion Show</span>
+                    <h2 class="featured-title">Spring 2026 Fashion Showcase</h2>
+                    <p class="featured-description">Experience our latest spring collection featuring vibrant colors and contemporary designs. Join us for an unforgettable evening of fashion celebrating the brand's vision.</p>
+                    
+                    <div class="featured-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📅</span>
+                            <div>
+                                <span class="detail-label">Date & Time</span>
+                                <span class="detail-value">March 15, 2026 • 7:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <div>
+                                <span class="detail-label">Location</span>
+                                <span class="detail-value">BILKY Grand Hall, New York</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎫</span>
+                            <div>
+                                <span class="detail-label">Availability</span>
+                                <span class="detail-value">Limited Seats Available</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-lg);"
+                        onclick="alert('RSVP feature coming soon! Contact us for reservations.')">Reserve Your Seat</button>
+                </div>
+            </div>
+
+            <!-- Upcoming Events Timeline -->
+            <div class="section-header" style="margin-top: var(--space-3xl); text-align: center;">
+                <h2 class="section-title">More Experiences</h2>
+                <p class="section-description">Explore our other upcoming events and exclusive offerings</p>
+            </div>
+
+            <div class="events-timeline">
+                <!-- Event 2 -->
+                <div class="timeline-event">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80"
+                                alt="VIP Trunk Show">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">March 22, 2026</div>
+                            <h3 class="timeline-title">VIP Exclusive Collection Preview</h3>
+                            <p class="timeline-description">An exclusive preview of our premium collection for VIP members. Personal styling sessions available.</p>
+                            <div class="timeline-meta">
+                                <span>📍 BILKY Boutique, Manhattan</span>
+                                <span>🎫 VIP Members Only</span>
+                            </div>
+                            <button class="btn btn-outline" style="margin-top: var(--space-md);"
+                                onclick="alert('Please login to your VIP account to RSVP.')">VIP RSVP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="timeline-event">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-image">
+                            <img src="https://images.unsplash.com/flagged/photo-1568988039441-11f295d74d89?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGZhc2hpb24lMjBzaG93fGVufDB8fDB8fHww"
+                            alt="Designer Meet & Greet">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">April 5, 2026</div>
+                            <h3 class="timeline-title">Creative Director's Artisan Talk</h3>
+                            <p class="timeline-description">Meet our lead designers and learn about the inspirations behind our latest collections. Light refreshments will be served.</p>
+                            <div class="timeline-meta">
+                                <span>📍 BILKY Studio, SoHo</span>
+                                <span>🎫 Free Entry - RSVP Required</span>
+                            </div>
+                            <button class="btn btn-secondary"
+                                onclick="window.location.href='contact.html'">RSVP Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="timeline-event">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-image">
+                            <img src="https://images.unsplash.com/photo-1683223059099-e2f012c65630?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbiUyMGNvbGxlY3Rpb258ZW58MHx8MHx8fDA%3D"
+                            alt="Summer Preview">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">April 20, 2026</div>
+                            <h3 class="timeline-title">Summer Collection Exclusive Viewing</h3>
+                            <p class="timeline-description">Be the first to see our upcoming summer collection. Enjoy exclusive discounts for early purchases.</p>
+                            <div class="timeline-meta">
+                                <span>📍 BILKY Main Store</span>
+                                <span>🎫 Open to All</span>
+                            </div>
+                            <button class="btn btn-primary"
+                                onclick="window.location.href='contact.html'">Register Interest</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 5 -->
+                <div class="timeline-event">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-image">
+                            <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&q=80"
+                            alt="Charity Gala">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">May 10, 2026</div>
+                            <h3 class="timeline-title">Style & Purpose Charity Benefit</h3>
+                            <p class="timeline-description">Join us for an elegant evening supporting local fashion education programs. Silent auction and runway show included.</p>
+                            <div class="timeline-meta">
+                                <span>📍 Plaza Hotel, New York</span>
+                                <span>🎫 $150 per ticket</span>
+                            </div>
+                            <button class="btn btn-primary"
+                                onclick="alert('Ticket sales open March 1st! Contact us for early reservations.')">Buy Tickets</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 6 -->
+                <div class="timeline-event">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-image">
+                            <img src="https://images.unsplash.com/photo-1753162661885-34d1338d1235?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGZhc2hpb24lMjB3b3Jrc2hvcHxlbnwwfHwwfHx8MA%3D%3D"
+                            alt="Fashion Workshop">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">May 25, 2026</div>
+                            <h3 class="timeline-title">Fashion Mastery Session</h3>
+                            <p class="timeline-description">Learn the secrets of personal styling from our expert fashion consultants. Hands-on workshop with take-home materials.</p>
+                            <div class="timeline-meta">
+                                <span>📍 BILKY Academy</span>
+                                <span>🎫 $75 - Limited to 20 participants</span>
+                            </div>
+                            <button class="btn btn-outline"
+                                onclick="window.location.href='contact.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">BILKY</div>
+                <p class="footer-description">Where elegance meets artistry. Curated pieces of exceptional quality that embody timeless style and sophistication.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="products.html">Product Showcase</a></li>
+                    <li><a href="trustees.html">Board of Trustees</a></li>
+                    <li><a href="contact.html">Inquiries & Appointments</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BILKY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // JavaScript feature for this page - Live Countdown Timer
+        function updateCountdown() {
+            // Set target date (March 15, 2026)
+            const targetDate = new Date('2026-03-15T19:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Calculate time units
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update display
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+    </script>
+</body>
+
+</html>
